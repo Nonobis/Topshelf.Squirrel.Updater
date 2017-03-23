@@ -1,11 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-    <metadata>
-        <id>Topshelf.Squirrel.Windows</id>
-        <version>1.0.0</version>
-        <authors>Kibnet</authors>
-		<owners>$(Authors)</owners>
-        <description>AutoSelf-Update Windows Service</description>
-		<iconUrl>https://sdlblobstorage.azureedge.net/public/images/sdl-logo.ico</iconUrl>
-    </metadata>
+  <metadata>
+    <id>Topshelf.Squirrel.Windows</id>
+    <!-- version will be replaced by MSBuild -->
+    <version>0.0.0.0</version>
+    <description>Integration of auto-update mechanism in Topshelf services out of the box. (Fork of https://github.com/Kibnet/Topshelf.Squirrel.Windows).</description>
+    <authors>A. Dartois</authors>
+    <projectUrl>https://github.com/Nonobis/Topshelf.Squirrel.Windows</projectUrl>
+    <!--
+    <owners>YourNameHere</owners>
+    <licenseUrl>http://#</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <releaseNotes>
+    </releaseNotes>
+    -->
+  </metadata>
+  <files>
+    <file src="*.*" target="lib\net45\" exclude="*.pdb;*.nupkg;*.vshost.*"/>
+    <file src="**\*.*" target="lib\net45\" exclude="*.pdb;*.nupkg;*.vshost.*"/>
+  </files>
 </package>

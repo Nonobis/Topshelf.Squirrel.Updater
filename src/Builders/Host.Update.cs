@@ -1,3 +1,4 @@
+using log4net;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -6,22 +7,80 @@ using Topshelf.Builders;
 using Topshelf.Runtime;
 using Topshelf.Runtime.Windows;
 
+/// <summary>
+/// 
+/// </summary>
 namespace Topshelf.Squirrel.Windows.Builders
 {
 	public sealed class UpdateHostBuilder : HostBuilder
 	{
-		private readonly StopBuilder _stopOldHostBuilder;
-		private readonly StartBuilder _startOldHostBuilder;
-		private readonly UninstallBuilder _uninstallOldHostBuilder;
-		private readonly InstallAndStartHostBuilder _installAndStartNewHostBuilder;
-		private readonly StopAndUninstallHostBuilder _stopAndUninstallNewHostBuilder;
 
-		public HostEnvironment Environment { get; }
-		public HostSettings Settings { get; }
+        #region Definition du logger
 
-		public bool WithOverlapping { get; }
+        /// <summary>
+        /// Logger Log4Net
+        /// </summary>
+        private static readonly ILog Log = LogManager.GetLogger(typeof(UpdateHostBuilder));
 
-		public UpdateHostBuilder(HostEnvironment environment, HostSettings settings, string version,
+        #endregion
+
+        /// <summary>
+        /// The stop old host builder
+        /// </summary>
+        private readonly StopBuilder _stopOldHostBuilder;
+
+        /// <summary>
+        /// The start old host builder
+        /// </summary>
+        private readonly StartBuilder _startOldHostBuilder;
+
+        /// <summary>
+        /// The uninstall old host builder
+        /// </summary>
+        private readonly UninstallBuilder _uninstallOldHostBuilder;
+
+        /// <summary>
+        /// The install and start new host builder
+        /// </summary>
+        private readonly InstallAndStartHostBuilder _installAndStartNewHostBuilder;
+
+        /// <summary>
+        /// The stop and uninstall new host builder
+        /// </summary>
+        private readonly StopAndUninstallHostBuilder _stopAndUninstallNewHostBuilder;
+
+        /// <summary>
+        /// Gets the environment.
+        /// </summary>
+        /// <value>
+        /// The environment.
+        /// </value>
+        public HostEnvironment Environment { get; }
+
+        /// <summary>
+        /// Gets the settings.
+        /// </summary>
+        /// <value>
+        /// The settings.
+        /// </value>
+        public HostSettings Settings { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether [with overlapping].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [with overlapping]; otherwise, <c>false</c>.
+        /// </value>
+        public bool WithOverlapping { get; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UpdateHostBuilder"/> class.
+        /// </summary>
+        /// <param name="environment">The environment.</param>
+        /// <param name="settings">The settings.</param>
+        /// <param name="version">The version.</param>
+        /// <param name="withOverlapping">if set to <c>true</c> [with overlapping].</param>
+        public UpdateHostBuilder(HostEnvironment environment, HostSettings settings, string version,
 			bool withOverlapping = false)
 		{
 			Environment = environment;
@@ -41,7 +100,13 @@ namespace Topshelf.Squirrel.Windows.Builders
 			_stopAndUninstallNewHostBuilder = new StopAndUninstallHostBuilder(Environment, Settings, version);
 		}
 
-		private static PropertyDataCollection GetLastWmiServiceInfo(string serviceNamePattern, string currentName)
+        /// <summary>
+        /// Gets the last WMI service information.
+        /// </summary>
+        /// <param name="serviceNamePattern">The service name pattern.</param>
+        /// <param name="currentName">Name of the current.</param>
+        /// <returns></returns>
+        private static PropertyDataCollection GetLastWmiServiceInfo(string serviceNamePattern, string currentName)
 		{
 			var searcher =
 				new ManagementObjectSearcher(
@@ -56,7 +121,12 @@ namespace Topshelf.Squirrel.Windows.Builders
 			return managementBaseObject.Properties;
 		}
 
-		public Host Build(ServiceBuilder serviceBuilder)
+        /// <summary>
+        /// Builds the specified service builder.
+        /// </summary>
+        /// <param name="serviceBuilder">The service builder.</param>
+        /// <returns></returns>
+        public Host Build(ServiceBuilder serviceBuilder)
 		{
 			return new UpdateHost(_installAndStartNewHostBuilder.Build(serviceBuilder),
 				_stopOldHostBuilder.Build(serviceBuilder),
@@ -65,7 +135,12 @@ namespace Topshelf.Squirrel.Windows.Builders
 				_startOldHostBuilder.Build(serviceBuilder), WithOverlapping);
 		}
 
-		public void Match<T>(Action<T> callback) where T : class, HostBuilder
+        /// <summary>
+        /// Matches the specified callback.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="callback">The callback.</param>
+        public void Match<T>(Action<T> callback) where T : class, HostBuilder
 		{
 			_installAndStartNewHostBuilder.Match(callback);
 			_stopOldHostBuilder.Match(callback);
@@ -76,15 +151,46 @@ namespace Topshelf.Squirrel.Windows.Builders
 
 		private sealed class UpdateHost : Host
 		{
-			private readonly Host _stopOldHost;
-			private readonly Host _startOldHost;
-			private readonly Host _uninstallOldHost;
-			private readonly Host _installAndStartNewHost;
-			private readonly Host _stopAndUninstallNewHost;
+            /// <summary>
+            /// The stop old host
+            /// </summary>
+            private readonly Host _stopOldHost;
 
-			private readonly bool _withOverlapping;
+            /// <summary>
+            /// The start old host
+            /// </summary>
+            private readonly Host _startOldHost;
 
-			public UpdateHost(Host installAndStartNewHost, Host stopOldHost, Host uninstallOldHost,
+            /// <summary>
+            /// The uninstall old host
+            /// </summary>
+            private readonly Host _uninstallOldHost;
+
+            /// <summary>
+            /// The install and start new host
+            /// </summary>
+            private readonly Host _installAndStartNewHost;
+
+            /// <summary>
+            /// The stop and uninstall new host
+            /// </summary>
+            private readonly Host _stopAndUninstallNewHost;
+
+            /// <summary>
+            /// The with overlapping
+            /// </summary>
+            private readonly bool _withOverlapping;
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="UpdateHost"/> class.
+            /// </summary>
+            /// <param name="installAndStartNewHost">The install and start new host.</param>
+            /// <param name="stopOldHost">The stop old host.</param>
+            /// <param name="uninstallOldHost">The uninstall old host.</param>
+            /// <param name="stopAndUninstallNewHost">The stop and uninstall new host.</param>
+            /// <param name="startOldHost">The start old host.</param>
+            /// <param name="withOverlapping">if set to <c>true</c> [with overlapping].</param>
+            public UpdateHost(Host installAndStartNewHost, Host stopOldHost, Host uninstallOldHost,
 				Host stopAndUninstallNewHost, Host startOldHost, bool withOverlapping = false)
 			{
 				_installAndStartNewHost = installAndStartNewHost;
@@ -95,33 +201,37 @@ namespace Topshelf.Squirrel.Windows.Builders
 				_withOverlapping = withOverlapping;
 			}
 
-			public TopshelfExitCode Run()
+            /// <summary>
+            /// Runs the configured host
+            /// </summary>
+            /// <returns></returns>
+            public TopshelfExitCode Run()
 			{
-				Trace.TraceInformation("Update {0} Overlapping", _withOverlapping ? "with" : "without");
+				Log.InfoFormat("Update {0} Overlapping", _withOverlapping ? "with" : "without");
 				var exitCode = TopshelfExitCode.Ok;
 				if (!_withOverlapping)
 				{
 					exitCode = _stopOldHost.Run();
-					Trace.TraceInformation("Service was self-stopped");
+					Log.InfoFormat("Service was self-stopped");
 				}
 				if (exitCode == TopshelfExitCode.Ok)
 				{
 					exitCode = _installAndStartNewHost.Run();
 					if (exitCode == TopshelfExitCode.Ok)
 					{
-						Trace.TraceInformation("Started new version");
+						Log.InfoFormat("Started new version");
 						if (_withOverlapping)
 							_stopOldHost.Run();
 						exitCode = _uninstallOldHost.Run();
-						Trace.TraceInformation("The update has been successfully completed");
+						Log.InfoFormat("The update has been successfully completed");
 					}
 					else
 					{
-						Trace.TraceInformation("Not started new version");
+						Log.InfoFormat("Not started new version");
 						if (!_withOverlapping)
 							exitCode = _startOldHost.Run();
 						exitCode = _stopAndUninstallNewHost.Run();
-						Trace.TraceWarning("During the update failed and was rolled back.");
+						Log.WarnFormat("During the update failed and was rolled back.");
 					}
 				}
 

@@ -2,6 +2,9 @@
 {
 	public interface IUpdater
 	{
-		void Start();
+        /// <summary>
+        /// Starts updater
+        /// </summary>
+        void Start();
 	}
 }

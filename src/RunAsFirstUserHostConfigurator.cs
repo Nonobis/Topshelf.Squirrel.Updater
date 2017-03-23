@@ -1,4 +1,6 @@
-﻿using System;
+﻿using log4net;
+using SimpleHelper;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.DirectoryServices.AccountManagement;
@@ -14,68 +16,106 @@ namespace Topshelf.Squirrel.Windows
 {
 	public class RunAsFirstUserHostConfigurator : HostBuilderConfigurator
 	{
-		private const string creds = "Creds.txt";
 
-		public string Password { get; private set; }
+        #region Definition du logger
 
-		public string Username { get; private set; }
+        /// <summary>
+        /// Logger Log4Net
+        /// </summary>
+        private static readonly ILog Log = LogManager.GetLogger(typeof(RunAsFirstUserHostConfigurator));
 
-		public HostBuilder Configure(HostBuilder builder)
+        #endregion
+
+        /// <summary>
+        /// The credentials
+        /// </summary>
+        private const string credentials = "credentials.txt";
+
+        /// <summary>
+        /// Gets the password.
+        /// </summary>
+        /// <value>
+        /// The password.
+        /// </value>
+        public string Password { get; private set; }
+
+        /// <summary>
+        /// Gets the username.
+        /// </summary>
+        /// <value>
+        /// The username.
+        /// </value>
+        public string Username { get; private set; }
+
+        /// <summary>
+        /// Configures the specified builder.
+        /// </summary>
+        /// <param name="builder">The builder.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException">builder</exception>
+        public HostBuilder Configure(HostBuilder builder)
 		{
 			if (builder == null)
 				throw new ArgumentNullException("builder");
-			builder.Match<InstallBuilder>((Action<InstallBuilder>) (x =>
-			{
-				bool valid = false;
-				var path = new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.Parent.FullName;
-				var filename = Path.Combine(path, creds);
-				if (File.Exists(filename))
-				{
-					try
-					{
-						var credlines = File.ReadAllLines(filename);
-						Username = credlines[0];
-						Password = credlines[1];
-						valid = CheckCredentials(Username, Password);
-					}
-					catch (Exception ex)
-					{
-						Trace.TraceError("Reading error: {0}",ex);
-					}
-				}
-				while (!valid)
-				{
-					using (ServiceInstallerDialog serviceInstallerDialog = new ServiceInstallerDialog())
-					{
-						serviceInstallerDialog.Username = Username;
-						serviceInstallerDialog.ShowInTaskbar = true;
-						serviceInstallerDialog.ShowDialog();
-						switch (serviceInstallerDialog.Result)
-						{
-							case ServiceInstallerDialogResult.OK:
-								Username = serviceInstallerDialog.Username;
-								Password = serviceInstallerDialog.Password;
-								valid = CheckCredentials(Username, Password);
-								if (valid)
-								{
-									File.WriteAllLines(filename, new[] {Username, Password});
-								}
-								break;
-							case ServiceInstallerDialogResult.Canceled:
-								throw new InvalidOperationException("UserCanceledInstall");
-						}
-					}
-				}
-				x.RunAs(Username, Password, ServiceAccount.User);
-			}));
+
+			builder.Match<InstallBuilder>(x =>
+           {
+               bool valid = false;
+               var path = new FileInfo(AssemblyHelper.AssemblyDirectory).Directory.Parent.FullName;
+               var filename = Path.Combine(path, credentials);
+               if (File.Exists(filename))
+               {
+                   try
+                   {
+                       var credlines = File.ReadAllLines(filename);
+                       Username = credlines[0];
+                       Password = credlines[1];
+                       valid = CheckCredentials(Username, Password);
+                   }
+                   catch (Exception ex)
+                   {
+                       Log.ErrorFormat("Reading error: {0}", ex);
+                   }
+               }
+               while (!valid)
+               {
+                   using (ServiceInstallerDialog serviceInstallerDialog = new ServiceInstallerDialog())
+                   {
+                       serviceInstallerDialog.Username = Username;
+                       serviceInstallerDialog.ShowInTaskbar = true;
+                       serviceInstallerDialog.ShowDialog();
+                       switch (serviceInstallerDialog.Result)
+                       {
+                           case ServiceInstallerDialogResult.OK:
+                               Username = serviceInstallerDialog.Username;
+                               Password = serviceInstallerDialog.Password;
+                               valid = CheckCredentials(Username, Password);
+                               if (valid)
+                               {
+                                   File.WriteAllLines(filename, new[] { Username, Password });
+                               }
+                               break;
+                           case ServiceInstallerDialogResult.Canceled:
+                               throw new InvalidOperationException("UserCanceledInstall");
+                       }
+                   }
+               }
+               x.RunAs(Username, Password, ServiceAccount.User);
+           });
 			return builder;
 		}
 
-		private bool CheckCredentials(string username, string password)
+        /// <summary>
+        /// Checks the credentials.
+        /// </summary>
+        /// <param name="username">The username.</param>
+        /// <param name="password">The password.</param>
+        /// <returns></returns>
+        private bool CheckCredentials(string username, string password)
 		{
 			try
 			{
-				if (username.StartsWith(@".\"))
+				if (username.StartsWith(@".\", StringComparison.Ordinal))
 				{
 					using (PrincipalContext context = new PrincipalContext(ContextType.Machine))
 					{
@@ -89,12 +129,16 @@ namespace Topshelf.Squirrel.Windows
 			}
 			catch (Exception ex)
 			{
-				Trace.TraceError("Exception: {0}", ex);
+				Log.ErrorFormat("Exception: {0}", ex);
 				return false;
 			}
 		}
 
-		public IEnumerable<ValidateResult> Validate()
+        /// <summary>
+        /// Validates this instance.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ValidateResult> Validate()
 		{
 			yield return this.Success("All ok!");
 		}

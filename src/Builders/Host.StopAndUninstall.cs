@@ -1,3 +1,4 @@
+using log4net;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -10,14 +11,54 @@ namespace Topshelf.Squirrel.Windows.Builders
 {
 	public sealed class StopAndUninstallHostBuilder : HostBuilder
 	{
-		private readonly StopBuilder _stopBuilder;
-		private readonly UninstallBuilder _uninstallBuilder;
-		private readonly int _processId;
 
-		public HostEnvironment Environment { get; }
-		public HostSettings Settings { get; }
+        #region Definition du logger
 
-		public StopAndUninstallHostBuilder(HostEnvironment environment, HostSettings settings, string version = null)
+        /// <summary>
+        /// Logger Log4Net
+        /// </summary>
+        private static readonly ILog Log = LogManager.GetLogger(typeof(StopAndUninstallHostBuilder));
+
+        #endregion
+
+        /// <summary>
+        /// The stop builder
+        /// </summary>
+        private readonly StopBuilder _stopBuilder;
+
+        /// <summary>
+        /// The uninstall builder
+        /// </summary>
+        private readonly UninstallBuilder _uninstallBuilder;
+
+        /// <summary>
+        /// The process identifier
+        /// </summary>
+        private readonly int _processId;
+
+        /// <summary>
+        /// Gets the environment.
+        /// </summary>
+        /// <value>
+        /// The environment.
+        /// </value>
+        public HostEnvironment Environment { get; }
+
+        /// <summary>
+        /// Gets the settings.
+        /// </summary>
+        /// <value>
+        /// The settings.
+        /// </value>
+        public HostSettings Settings { get; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StopAndUninstallHostBuilder"/> class.
+        /// </summary>
+        /// <param name="environment">The environment.</param>
+        /// <param name="settings">The settings.</param>
+        /// <param name="version">The version.</param>
+        public StopAndUninstallHostBuilder(HostEnvironment environment, HostSettings settings, string version = null)
 		{
 			Environment = environment;
 
@@ -48,18 +89,33 @@ namespace Topshelf.Squirrel.Windows.Builders
 			_uninstallBuilder.Sudo();
 		}
 
-		public Host Build(ServiceBuilder serviceBuilder)
+        /// <summary>
+        /// Builds the specified service builder.
+        /// </summary>
+        /// <param name="serviceBuilder">The service builder.</param>
+        /// <returns></returns>
+        public Host Build(ServiceBuilder serviceBuilder)
 		{
 			return new StopAndUninstallHost(_stopBuilder.Build(serviceBuilder), _uninstallBuilder.Build(serviceBuilder), _processId);
 		}
 
-		public void Match<T>(Action<T> callback) where T : class, HostBuilder
+        /// <summary>
+        /// Matches the specified callback.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="callback">The callback.</param>
+        public void Match<T>(Action<T> callback) where T : class, HostBuilder
 		{
 			_stopBuilder.Match(callback);
 			_uninstallBuilder.Match(callback);
 		}
 
-		private static PropertyDataCollection GetWmiServiceInfo(string serviceNamePattern)
+        /// <summary>
+        /// Gets the WMI service information.
+        /// </summary>
+        /// <param name="serviceNamePattern">The service name pattern.</param>
+        /// <returns></returns>
+        private static PropertyDataCollection GetWmiServiceInfo(string serviceNamePattern)
 		{
 			var searcher = new ManagementObjectSearcher($@"SELECT * FROM Win32_Service WHERE Name='{serviceNamePattern}' or Name like '%{serviceNamePattern}[^0-9a-z]%' and startmode!='disabled'");
 			var collection = searcher.Get();
@@ -74,18 +130,39 @@ namespace Topshelf.Squirrel.Windows.Builders
 
 		private sealed class StopAndUninstallHost : Host
 		{
-			private readonly Host _stopHost;
-			private readonly Host _uninstallHost;
-			private readonly int _processId;
+            /// <summary>
+            /// The stop host
+            /// </summary>
+            private readonly Host _stopHost;
 
-			public StopAndUninstallHost(Host stopHost, Host uninstallHost, int processId)
+            /// <summary>
+            /// The uninstall host
+            /// </summary>
+            private readonly Host _uninstallHost;
+
+            /// <summary>
+            /// The process identifier
+            /// </summary>
+            private readonly int _processId;
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="StopAndUninstallHost"/> class.
+            /// </summary>
+            /// <param name="stopHost">The stop host.</param>
+            /// <param name="uninstallHost">The uninstall host.</param>
+            /// <param name="processId">The process identifier.</param>
+            public StopAndUninstallHost(Host stopHost, Host uninstallHost, int processId)
 			{
 				_stopHost = stopHost;
 				_uninstallHost = uninstallHost;
 				_processId = processId;
 			}
 
-			public TopshelfExitCode Run()
+            /// <summary>
+            /// Runs the configured host
+            /// </summary>
+            /// <returns></returns>
+            public TopshelfExitCode Run()
 			{
 				var exitCode = _stopHost.Run();
 

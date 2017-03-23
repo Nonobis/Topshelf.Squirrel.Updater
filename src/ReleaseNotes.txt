@@ -1,0 +1,5 @@
+﻿Version 0.0.0.1
+	- Fork of Initial Version
+	- Add dependancies Topshelf.Log4Net
+	- Add support for nuget
+	- Refactoring
