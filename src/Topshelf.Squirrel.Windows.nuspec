@@ -6,9 +6,9 @@
     <version>0.0.0.0</version>
     <description>Integration of auto-update mechanism in Topshelf services out of the box. (Fork of https://github.com/Kibnet/Topshelf.Squirrel.Windows).</description>
     <authors>A. Dartois</authors>
+    <owners>A. Dartois</owners>
     <projectUrl>https://github.com/Nonobis/Topshelf.Squirrel.Windows</projectUrl>
     <!--
-    <owners>YourNameHere</owners>
     <licenseUrl>http://#</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <releaseNotes>
