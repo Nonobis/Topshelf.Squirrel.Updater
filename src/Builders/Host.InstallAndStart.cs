@@ -30,21 +30,6 @@ namespace Topshelf.Squirrel.Windows.Builders
         private readonly StartBuilder _startBuilder;
 
         /// <summary>
-        /// The username
-        /// </summary>
-        private string username;
-
-        /// <summary>
-        /// The password
-        /// </summary>
-        private string password;
-
-        /// <summary>
-        /// The service account
-        /// </summary>
-        private ServiceAccount serviceAccount;
-
-        /// <summary>
         /// Gets the environment.
         /// </summary>
         /// <value>

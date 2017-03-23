@@ -53,11 +53,8 @@ namespace Topshelf.Squirrel.Windows
         /// <exception cref="Exception">Update manager can not be null</exception>
         public RepeatedTimeUpdater(IUpdateManager updateManager)
         {
-            if (updateManager == null)
-                throw new Exception("Update manager can not be null");
-
             curversion = Assembly.GetEntryAssembly().GetName().Version.ToString();
-            this.updateManager = updateManager;
+            this.updateManager = updateManager ?? throw new Exception("Update manager can not be null");
         }
 
         /// <summary>
