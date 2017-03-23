@@ -1,5 +1,4 @@
 ﻿using log4net;
-using SimpleHelper;
 using System;
 using System.Reflection;
 using Topshelf.HostConfigurators;
@@ -67,8 +66,8 @@ namespace Topshelf.Squirrel.Windows
 			string serviceName = null,
 			string serviceDisplayName = null, IUpdater updater = null, bool withOverlapping = false, bool promptForCredentialsWhileInstalling = false)
 		{
-			var assemblyName = AssemblyHelper.AssemblyTitle;
-			this.serviceName = serviceName ?? assemblyName;
+			var assemblyName = Assembly.GetEntryAssembly().GetName().Name;
+            this.serviceName = serviceName ?? assemblyName;
 			this.serviceDisplayName = serviceDisplayName ?? assemblyName;
 			this.selfUpdatableService = selfUpdatableService;
 			this.withOverlapping = withOverlapping;
@@ -100,15 +99,12 @@ namespace Topshelf.Squirrel.Windows
 			config.Service<ISelfUpdatableService>(service =>
 			{
 				service.ConstructUsing(settings => selfUpdatableService);
-
 				service.WhenStarted((s, hostControl) =>
 				{
 					s.Start();
 					return true;
 				});
-
 				service.AfterStartingService(() => { updater?.Start(); });
-
 				service.WhenStopped(s => { s.Stop(); });
 			});
 

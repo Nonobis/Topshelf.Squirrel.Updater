@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Reflection;
 using System.Threading.Tasks;
 using NuGet;
 using Squirrel;
 using Topshelf.Squirrel.Windows.Interfaces;
-using SimpleHelper;
 using log4net;
 
 namespace Topshelf.Squirrel.Windows
@@ -58,7 +56,7 @@ namespace Topshelf.Squirrel.Windows
             if (updateManager == null)
                 throw new Exception("Update manager can not be null");
 
-            curversion = AssemblyHelper.AssemblyVersion;
+            curversion = Assembly.GetEntryAssembly().GetName().Version.ToString();
             this.updateManager = updateManager;
         }
 

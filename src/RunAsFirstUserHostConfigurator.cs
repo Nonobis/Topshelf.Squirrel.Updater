@@ -1,8 +1,6 @@
 ﻿using log4net;
-using SimpleHelper;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.DirectoryServices.AccountManagement;
 using System.IO;
 using System.Reflection;
@@ -14,7 +12,7 @@ using Topshelf.HostConfigurators;
 
 namespace Topshelf.Squirrel.Windows
 {
-	public class RunAsFirstUserHostConfigurator : HostBuilderConfigurator
+    public class RunAsFirstUserHostConfigurator : HostBuilderConfigurator
 	{
 
         #region Definition du logger
@@ -61,7 +59,7 @@ namespace Topshelf.Squirrel.Windows
 			builder.Match<InstallBuilder>(x =>
            {
                bool valid = false;
-               var path = new FileInfo(AssemblyHelper.AssemblyDirectory).Directory.Parent.FullName;
+               var path = new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.Parent.FullName;
                var filename = Path.Combine(path, credentials);
                if (File.Exists(filename))
                {
