@@ -10,7 +10,7 @@ namespace Topshelf.Squirrel.Windows.Builders
 	public sealed class InstallAndStartHostBuilder : HostBuilder
 	{
 
-        #region Definition du logger
+        #region Logger
 
         /// <summary>
         /// Logger Log4Net

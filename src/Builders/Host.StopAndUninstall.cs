@@ -12,7 +12,7 @@ namespace Topshelf.Squirrel.Windows.Builders
 	public sealed class StopAndUninstallHostBuilder : HostBuilder
 	{
 
-        #region Definition du logger
+        #region Logger
 
         /// <summary>
         /// Logger Log4Net

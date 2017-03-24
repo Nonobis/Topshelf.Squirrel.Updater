@@ -13,7 +13,7 @@ namespace Topshelf.Squirrel.Windows
 	public class SquirreledHost
 	{
 
-        #region Definition du logger
+        #region Logger
 
         /// <summary>
         /// Logger Log4Net

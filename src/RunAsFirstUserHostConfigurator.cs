@@ -15,7 +15,7 @@ namespace Topshelf.Squirrel.Windows
     public class RunAsFirstUserHostConfigurator : HostBuilderConfigurator
 	{
 
-        #region Definition du logger
+        #region Logger
 
         /// <summary>
         /// Logger Log4Net
