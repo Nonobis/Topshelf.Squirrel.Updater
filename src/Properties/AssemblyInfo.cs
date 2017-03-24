@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Topshelf.Squirrel.Windows")]
-[assembly: AssemblyDescription("Fork of https://github.com/Kibnet/Topshelf.Squirrel.Windows by Kibnet")]
+[assembly: AssemblyDescription("Integration of auto-update mechanism in Topshelf services out of the box. (Fork of https://github.com/Kibnet/Topshelf.Squirrel.Windows).")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Topshelf.Squirrel.Windows")]
