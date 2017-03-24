@@ -112,13 +112,17 @@ namespace Topshelf.Squirrel.Windows.Builders
 				new ManagementObjectSearcher(
 					$@"SELECT * FROM Win32_Service WHERE (Name='{serviceNamePattern}' or Name like '%{serviceNamePattern}[^0-9a-z]%' and startmode!='disabled') and Name != '{currentName}'");
 			var collection = searcher.Get();
-			if (collection.Count == 0)
+			if (collection!=null && collection.Count == 0)
 			{
 				return null;
 			}
 
 			var managementBaseObject = collection.Cast<ManagementBaseObject>().Last();
-			return managementBaseObject.Properties;
+            if (managementBaseObject != null)
+            {
+                return managementBaseObject.Properties;
+            }
+            return null;
 		}
 
         /// <summary>
@@ -223,11 +227,11 @@ namespace Topshelf.Squirrel.Windows.Builders
 						if (_withOverlapping)
 							_stopOldHost.Run();
 						exitCode = _uninstallOldHost.Run();
-						Log.InfoFormat("The update has been successfully completed");
+						Log.InfoFormat("The update has been successfully completed.");
 					}
 					else
 					{
-						Log.InfoFormat("Not started new version");
+						Log.InfoFormat("Not started new version.");
 						if (!_withOverlapping)
 							exitCode = _startOldHost.Run();
 						exitCode = _stopAndUninstallNewHost.Run();
