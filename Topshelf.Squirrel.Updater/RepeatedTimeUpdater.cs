@@ -3,10 +3,10 @@ using System.Reflection;
 using System.Threading.Tasks;
 using NuGet;
 using Squirrel;
-using Topshelf.Squirrel.Windows.Interfaces;
+using Topshelf.Squirrel.Updater.Interfaces;
 using log4net;
 
-namespace Topshelf.Squirrel.Windows
+namespace Topshelf.Squirrel.Updater
 {
     public class RepeatedTimeUpdater : IUpdater
     {
@@ -28,7 +28,7 @@ namespace Topshelf.Squirrel.Windows
         /// <summary>
         /// The update manager
         /// </summary>
-        private readonly IUpdateManager updateManager;
+        private IUpdateManager updateManager;
 
         /// <summary>
         /// The curversion
@@ -49,12 +49,14 @@ namespace Topshelf.Squirrel.Windows
         /// <summary>
         /// Initializes a new instance of the <see cref="RepeatedTimeUpdater"/> class.
         /// </summary>
-        /// <param name="updateManager">The update manager.</param>
+        /// <param name="pUpdateManager">The update manager.</param>
         /// <exception cref="Exception">Update manager can not be null</exception>
-        public RepeatedTimeUpdater(IUpdateManager updateManager)
+        public RepeatedTimeUpdater(IUpdateManager pUpdateManager)
         {
             curversion = Assembly.GetEntryAssembly().GetName().Version.ToString();
-            this.updateManager = updateManager ?? throw new Exception("Update manager can not be null");
+            updateManager = pUpdateManager;
+            if (updateManager == null)
+                throw new Exception("Update manager can not be null");
         }
 
         /// <summary>

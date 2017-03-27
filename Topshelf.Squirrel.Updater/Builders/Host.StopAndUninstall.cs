@@ -7,7 +7,7 @@ using Topshelf.Builders;
 using Topshelf.Runtime;
 using Topshelf.Runtime.Windows;
 
-namespace Topshelf.Squirrel.Windows.Builders
+namespace Topshelf.Squirrel.Updater.Builders
 {
 	public sealed class StopAndUninstallHostBuilder : HostBuilder
 	{

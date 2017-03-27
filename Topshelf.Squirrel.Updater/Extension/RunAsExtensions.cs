@@ -1,7 +1,7 @@
 ﻿using System;
 using Topshelf.HostConfigurators;
 
-namespace Topshelf.Squirrel.Windows
+namespace Topshelf.Squirrel.Updater
 {
 	public static class RunAsExtensions
 	{

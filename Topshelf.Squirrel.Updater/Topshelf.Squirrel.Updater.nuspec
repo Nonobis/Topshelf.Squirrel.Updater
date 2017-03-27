@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>Topshelf.Squirrel.Windows</id>
+    <id>Topshelf.Squirrel.Updater</id>
     <!-- version will be replaced by MSBuild -->
     <version>0.0.0.0</version>
-    <description>Integration of auto-update mechanism in Topshelf services out of the box. (Fork of https://github.com/Kibnet/Topshelf.Squirrel.Windows).</description>
+    <description>Integration of auto-update mechanism in Topshelf services out of the box. (Fork of https://github.com/Kibnet/Topshelf.Squirrel.Updater).</description>
     <authors>A. Dartois</authors>
     <owners>A. Dartois</owners>
-    <projectUrl>https://github.com/Nonobis/Topshelf.Squirrel.Windows</projectUrl>
+    <projectUrl>https://github.com/Nonobis/Topshelf.Squirrel.Updater</projectUrl>
     <!--
     <licenseUrl>http://#</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>

@@ -1,4 +1,4 @@
-﻿namespace Topshelf.Squirrel.Windows.Interfaces
+﻿namespace Topshelf.Squirrel.Updater.Interfaces
 {
 	public interface IUpdater
 	{

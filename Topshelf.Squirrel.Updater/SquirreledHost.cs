@@ -2,13 +2,13 @@
 using System;
 using System.Reflection;
 using Topshelf.HostConfigurators;
-using Topshelf.Squirrel.Windows.Builders;
-using Topshelf.Squirrel.Windows.Interfaces;
+using Topshelf.Squirrel.Updater.Builders;
+using Topshelf.Squirrel.Updater.Interfaces;
 
 /// <summary>
 /// 
 /// </summary>
-namespace Topshelf.Squirrel.Windows
+namespace Topshelf.Squirrel.Updater
 {
 	public class SquirreledHost
 	{

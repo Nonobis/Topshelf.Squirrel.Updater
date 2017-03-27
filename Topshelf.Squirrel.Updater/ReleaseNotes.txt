@@ -3,3 +3,4 @@
 	- Add dependancies Topshelf.Log4Net
 	- Add support for nuget
 	- Refactoring
+	- Rename project

@@ -7,8 +7,8 @@
     <ProjectGuid>{AEF86AD8-CECE-426D-9DC7-6313B6046CDA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Topshelf.Squirrel.Windows</RootNamespace>
-    <AssemblyName>Topshelf.Squirrel.Windows</AssemblyName>
+    <RootNamespace>Topshelf.Squirrel.Updater</RootNamespace>
+    <AssemblyName>Topshelf.Squirrel.Updater</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -115,7 +115,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Topshelf.Squirrel.Windows.nuspec">
+    <None Include="Topshelf.Squirrel.Updater.nuspec">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

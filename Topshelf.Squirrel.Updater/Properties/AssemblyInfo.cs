@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Topshelf.Squirrel.Windows")]
-[assembly: AssemblyDescription("Integration of auto-update mechanism in Topshelf services out of the box. (Fork of https://github.com/Kibnet/Topshelf.Squirrel.Windows).")]
+[assembly: AssemblyTitle("Topshelf.Squirrel.Updater")]
+[assembly: AssemblyDescription("Integration of auto-update mechanism in Topshelf services out of the box. (Fork of https://github.com/Kibnet/Topshelf.Squirrel.Updater).")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Topshelf.Squirrel.Windows")]
+[assembly: AssemblyProduct("Topshelf.Squirrel.Updater")]
 [assembly: AssemblyCopyright("Copyright © A. Dartois 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

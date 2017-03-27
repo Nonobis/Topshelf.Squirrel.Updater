@@ -10,7 +10,7 @@ using Topshelf.Runtime.Windows;
 /// <summary>
 /// 
 /// </summary>
-namespace Topshelf.Squirrel.Windows.Builders
+namespace Topshelf.Squirrel.Updater.Builders
 {
 	public sealed class UpdateHostBuilder : HostBuilder
 	{
