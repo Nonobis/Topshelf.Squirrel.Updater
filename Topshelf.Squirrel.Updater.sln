@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topshelf.Squirrel.Updater", "Topshelf.Squirrel.Updater\Topshelf.Squirrel.Updater.csproj", "{AEF86AD8-CECE-426D-9DC7-6313B6046CDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topshelf.Squirrel.Updater.Sample", "Topshelf.Squirrel.Updater.Sample\Topshelf.Squirrel.Updater.Sample.csproj", "{1558B1D1-B3DB-41F2-B6EF-4CA17BE890B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{AEF86AD8-CECE-426D-9DC7-6313B6046CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEF86AD8-CECE-426D-9DC7-6313B6046CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEF86AD8-CECE-426D-9DC7-6313B6046CDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1558B1D1-B3DB-41F2-B6EF-4CA17BE890B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1558B1D1-B3DB-41F2-B6EF-4CA17BE890B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1558B1D1-B3DB-41F2-B6EF-4CA17BE890B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1558B1D1-B3DB-41F2-B6EF-4CA17BE890B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
