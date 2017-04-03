@@ -114,6 +114,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Topshelf.Squirrel.Updater\Topshelf.Squirrel.Updater.csproj">
+      <Project>{AEF86AD8-CECE-426D-9DC7-6313B6046CDA}</Project>
+      <Name>Topshelf.Squirrel.Updater</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -127,6 +133,6 @@
       <Output TaskParameter="Assemblies" ItemName="myAssemblyInfo" />
     </GetAssemblyIdentity>
     <Exec Command="..\packages\NuGet.CommandLine.3.5.0\tools\nuget.exe pack $(AssemblyName).nuspec -Version $([System.Version]::Parse(%(myAssemblyInfo.Version)).ToString(3)) -Properties Configuration=Release -OutputDirectory $(OutDir) -BasePath $(OutDir)" />
-	<Exec Command="..\packages\squirrel.windows.1.5.2\tools\Squirrel.exe --releasify $(TargetDir)$(AssemblyName).$([System.Version]::Parse(%(myAssemblyInfo.Version)).ToString(3)).nupkg" />
+    <Exec Command="..\packages\squirrel.windows.1.5.2\tools\Squirrel.exe --releasify $(TargetDir)$(AssemblyName).$([System.Version]::Parse(%(myAssemblyInfo.Version)).ToString(3)).nupkg" />
   </Target>
 </Project>
