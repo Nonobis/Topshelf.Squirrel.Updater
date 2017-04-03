@@ -28,6 +28,7 @@ namespace Topshelf.Squirrel.Updater.Sample
         /// </summary>
         public void Start()
         {
+
         }
 
         /// <summary>
