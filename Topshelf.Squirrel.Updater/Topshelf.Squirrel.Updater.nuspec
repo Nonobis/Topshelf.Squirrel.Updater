@@ -5,9 +5,16 @@
     <!-- version will be replaced by MSBuild -->
     <version>0.0.0.0</version>
     <description>Integration of auto-update mechanism in Topshelf services out of the box. (Fork of https://github.com/Kibnet/Topshelf.Squirrel.Updater).</description>
+    <summary>Integration of auto-update mechanism in Topshelf services out of the box. (Fork of https://github.com/Kibnet/Topshelf.Squirrel.Updater).</summary>
     <authors>A. Dartois</authors>
     <owners>A. Dartois</owners>
     <projectUrl>https://github.com/Nonobis/Topshelf.Squirrel.Updater</projectUrl>
+    <releaseNotes>
+      - Remove Log4Net
+      - Change Install Mode
+    </releaseNotes>
+    <copyright>Copyright © A. Dartois 2017</copyright>
+    <tags>Topshelf Squirrel Updater Service Auto Update Squirrel</tags>
     <!--
     <licenseUrl>http://#</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>

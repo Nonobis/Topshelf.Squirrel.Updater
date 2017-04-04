@@ -52,15 +52,25 @@ namespace Topshelf.Squirrel.Updater.Sample
                 // Start Service Updater
                 IUpdater selfupdater = null;
                 ServiceHosted service = new ServiceHosted();
-                Log.Info("Updater Initialisation");
-                IUpdateManager updateManager = new UpdateManager(_urlNugetRepositories);
-                selfupdater = new RepeatedTimeUpdater(updateManager).SetCheckUpdatePeriod(TimeSpan.FromMinutes(30));
-                selfupdater.Start();
+
+                IUpdateManager updateManager = null;
+                try 
+                {
+                    Log.Info("Updater Initialisation");
+                    updateManager = new UpdateManager(_urlNugetRepositories, AssemblyHelper.AssemblyTitle);
+                    selfupdater = new RepeatedTimeUpdater(updateManager).SetCheckUpdatePeriod(TimeSpan.FromMinutes(30));
+                    selfupdater.Start();
+                } 
+                catch(Exception exx)
+                {
+                    Log.WarnFormat("'{0}' is not installed via Squirrel. Install program first.", AssemblyHelper.AssemblyTitle);
+                    Log.Warn(exx);
+                }
 
                 // Start TopShelf 
-                var x = new SquirreledHost(service, AssemblyHelper.AssemblyTitle, AssemblyHelper.AssemblyTitle, selfupdater, true, RunAS.LocalSystem);
+                var x = new SquirreledHost(service, AssemblyHelper.CurrentAssembly, selfupdater, true, RunAS.LocalSystem);
 
-                // If RunSpecificUser set login / password
+                // If RunAS.RunSpecificUser set login / password
                 //x.SetCredentials("", "");
 
                 x.ConfigureAndRun(HostConfig =>
@@ -76,12 +86,6 @@ namespace Topshelf.Squirrel.Updater.Sample
                     HostConfig.EnableServiceRecovery(rc => rc.RestartService(1));
                     HostConfig.EnableSessionChanged();
                     HostConfig.UseLog4Net();
-                    HostConfig.RunAsLocalSystem();
-                    HostConfig.SetDescription(AssemblyHelper.AssemblyDescription);
-                    HostConfig.SetDisplayName(AssemblyHelper.AssemblyTitle);
-                    HostConfig.SetServiceName(AssemblyHelper.AssemblyTitle);
-                    HostConfig.RunAsLocalSystem();
-                    HostConfig.UseAssemblyInfoForServiceInfo();
                     HostConfig.StartAutomatically();
                 });
             }
