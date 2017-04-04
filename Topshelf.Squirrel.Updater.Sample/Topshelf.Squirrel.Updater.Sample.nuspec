@@ -8,11 +8,12 @@
     <authors>A. Dartois</authors>
     <owners>A. Dartois</owners>
     <projectUrl>https://github.com/Nonobis/Topshelf.Squirrel.Updater</projectUrl>
+    <copyright>Copyright © A. Dartois 2017</copyright>
+    <releaseNotes>Updated sample</releaseNotes>
+    <tags>Topshelf.Squirrel.Updater Service Auto Update Squirrel Sample</tags>
     <!--
     <licenseUrl>http://#</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <releaseNotes>
-    </releaseNotes>
     -->
   </metadata>
   <files>

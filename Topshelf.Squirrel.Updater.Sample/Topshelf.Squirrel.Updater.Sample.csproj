@@ -113,6 +113,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Topshelf.Squirrel.Updater.Sample.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="lib\net45\" />
