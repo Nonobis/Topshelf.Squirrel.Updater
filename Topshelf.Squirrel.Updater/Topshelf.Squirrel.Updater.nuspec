@@ -10,7 +10,7 @@
     <authors>A. Dartois</authors>
     <owners>A. Dartois</owners>
     <projectUrl>https://github.com/Nonobis/Topshelf.Squirrel.Updater</projectUrl>
-    <releaseNotes>0.0.2 : Remove Log4Net and Minor Improvements</releaseNotes>
+    <releaseNotes>Add symbols in package</releaseNotes>
     <copyright>Copyright © A. Dartois 2017</copyright>
     <tags>Topshelf Squirrel Updater Service Auto Update Squirrel</tags>
     <!--
