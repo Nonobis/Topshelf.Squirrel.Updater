@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using NuGet;
 using Squirrel;
 using Topshelf.Squirrel.Updater.Interfaces;
-using log4net;
+using Topshelf.Logging;
 
 namespace Topshelf.Squirrel.Updater
 {
@@ -13,10 +13,7 @@ namespace Topshelf.Squirrel.Updater
 
         #region Logger
 
-        /// <summary>
-        /// Logger Log4Net
-        /// </summary>
-        private static readonly ILog Log = LogManager.GetLogger(typeof(RepeatedTimeUpdater));
+        private static readonly LogWriter Log;
 
         #endregion
 
@@ -60,7 +57,7 @@ namespace Topshelf.Squirrel.Updater
         }
 
         /// <summary>
-        /// Метод который проверяет обновления
+        /// Start Update task
         /// </summary>
         public void Start()
         {

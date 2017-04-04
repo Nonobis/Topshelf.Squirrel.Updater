@@ -1,7 +1,7 @@
-﻿using log4net;
-using System;
+﻿using System;
 using System.Reflection;
 using Topshelf.HostConfigurators;
+using Topshelf.Logging;
 using Topshelf.Squirrel.Updater.Builders;
 using Topshelf.Squirrel.Updater.Interfaces;
 
@@ -10,15 +10,12 @@ using Topshelf.Squirrel.Updater.Interfaces;
 /// </summary>
 namespace Topshelf.Squirrel.Updater
 {
-	public class SquirreledHost
-	{
+    public class SquirreledHost
+    {
 
         #region Logger
 
-        /// <summary>
-        /// Logger Log4Net
-        /// </summary>
-        private static readonly ILog Log = LogManager.GetLogger(typeof(SquirreledHost));
+        private static readonly LogWriter Log;
 
         #endregion
 
@@ -28,6 +25,11 @@ namespace Topshelf.Squirrel.Updater
         private readonly string serviceName;
 
         /// <summary>
+        /// Service Description
+        /// </summary>
+        private readonly string serviceDescription;
+
+        /// <summary>
         /// The service display name
         /// </summary>
         private readonly string serviceDisplayName;
@@ -35,12 +37,12 @@ namespace Topshelf.Squirrel.Updater
         /// <summary>
         /// Service RunAs 'Login'
         /// </summary>
-        private string serviceRunAsLogin;
+        private string serviceLogin;
 
         /// <summary>
         /// Service RunAs 'Password'
         /// </summary>
-        private string serviceRunAsPassword;
+        private string servicePassword;
 
         /// <summary>
         /// The with overlapping
@@ -51,6 +53,11 @@ namespace Topshelf.Squirrel.Updater
         /// Run Service AS
         /// </summary>
         private readonly RunAS TypeRunAs;
+
+        /// <summary>
+        /// Service Host Assembly
+        /// </summary>
+        private readonly Assembly HostAssembly;
 
         /// <summary>
         /// The prompt for credentials while installing
@@ -71,19 +78,15 @@ namespace Topshelf.Squirrel.Updater
         /// Initializes a new instance of the <see cref="SquirreledHost"/> class.
         /// </summary>
         public SquirreledHost(
-			ISelfUpdatableService selfUpdatableService, 
-			string serviceName = null,
-			string serviceDisplayName = null, IUpdater updater = null, bool withOverlapping = false, RunAS pTypeRunAs = RunAS.LocalSystem)
+			ISelfUpdatableService selfUpdatableService,  Assembly pHostAssembly, IUpdater updater = null, bool withOverlapping = false, RunAS pTypeRunAs = RunAS.LocalSystem)
 		{
-			var assemblyName = Assembly.GetEntryAssembly().GetName().Name;
-            this.serviceName = serviceName ?? assemblyName;
-			this.serviceDisplayName = serviceDisplayName ?? assemblyName;
-			this.selfUpdatableService = selfUpdatableService;
+            this.HostAssembly = pHostAssembly;
+            this.selfUpdatableService = selfUpdatableService;
 			this.withOverlapping = withOverlapping;
             TypeRunAs = pTypeRunAs;
             promptForCredentialsWhileInstalling = false;
-            serviceRunAsLogin = "";
-            serviceRunAsPassword = "";
+            serviceLogin = "";
+            servicePassword = "";
             if (pTypeRunAs == RunAS.PromptForCredentials)
             {
                 promptForCredentialsWhileInstalling = true;
@@ -98,8 +101,8 @@ namespace Topshelf.Squirrel.Updater
         /// <param name="pPassword"></param>
         public void SetCredentials(string pLogin, string pPassword)
         {
-            serviceRunAsLogin = pLogin;
-            serviceRunAsPassword = pPassword;
+            serviceLogin = pLogin;
+            servicePassword = pPassword;
         }
 
         /// <summary>
@@ -135,12 +138,13 @@ namespace Topshelf.Squirrel.Updater
 				service.WhenStopped(s => { s.Stop(); });
 			});
 
-			config.SetServiceName(serviceName);
+            config.SetDescription(serviceDescription);
+            config.SetServiceName(serviceName);
 			config.SetDisplayName(serviceDisplayName);
 			config.StartAutomatically();
 			config.EnableShutdown();
-
-			if (promptForCredentialsWhileInstalling)
+            config.UseAssemblyInfoForServiceInfo(HostAssembly);
+            if (promptForCredentialsWhileInstalling)
 			{
 				config.RunAsFirstPrompt();
 			}
@@ -160,7 +164,13 @@ namespace Topshelf.Squirrel.Updater
                 }
                 else if (TypeRunAs == RunAS.SpecificUser)
                 {
-                    config.RunAs(serviceRunAsLogin, serviceRunAsPassword);
+                    if (string.IsNullOrEmpty(serviceLogin))
+                        throw new Exception("Service Login not specified");
+
+                    if (string.IsNullOrEmpty(servicePassword))
+                        throw new Exception("Service Password not specified");
+
+                    config.RunAs(serviceLogin, servicePassword);
                 }
             }
 

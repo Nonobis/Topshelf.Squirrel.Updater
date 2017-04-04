@@ -1,33 +1,23 @@
-﻿using log4net;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.DirectoryServices.AccountManagement;
-using System.IO;
-using System.Reflection;
 using System.ServiceProcess;
 using System.ServiceProcess.Design;
 using Topshelf.Builders;
 using Topshelf.Configurators;
 using Topshelf.HostConfigurators;
+using Topshelf.Logging;
 
 namespace Topshelf.Squirrel.Updater
 {
     public class RunAsFirstUserHostConfigurator : HostBuilderConfigurator
-	{
+    {
 
         #region Logger
 
-        /// <summary>
-        /// Logger Log4Net
-        /// </summary>
-        private static readonly ILog Log = LogManager.GetLogger(typeof(RunAsFirstUserHostConfigurator));
+        private static readonly LogWriter Log;
 
         #endregion
-
-        /// <summary>
-        /// The credentials
-        /// </summary>
-        private const string credentials = "credentials.txt";
 
         /// <summary>
         /// Gets the password.
@@ -118,7 +108,7 @@ namespace Topshelf.Squirrel.Updater
         /// <returns></returns>
         public IEnumerable<ValidateResult> Validate()
 		{
-			yield return this.Success("All ok!");
+			yield return this.Success("Credentials are valid !");
 		}
 	}
 }

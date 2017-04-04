@@ -14,7 +14,7 @@ namespace Topshelf.Squirrel.Updater
         public static HostConfigurator RunAsFirstPrompt(this HostConfigurator configurator)
 		{
 			if (configurator == null)
-				throw new ArgumentNullException("configurator");
+				throw new ArgumentNullException("configurator not specified");
 
 			RunAsFirstUserHostConfigurator hostConfigurator = new RunAsFirstUserHostConfigurator();
 			configurator.AddConfigurator(hostConfigurator);

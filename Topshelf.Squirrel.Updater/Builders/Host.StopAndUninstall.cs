@@ -1,23 +1,19 @@
-using log4net;
 using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Management;
 using Topshelf.Builders;
+using Topshelf.Logging;
 using Topshelf.Runtime;
 using Topshelf.Runtime.Windows;
 
 namespace Topshelf.Squirrel.Updater.Builders
 {
-	public sealed class StopAndUninstallHostBuilder : HostBuilder
-	{
-
+    public sealed class StopAndUninstallHostBuilder : HostBuilder
+    {
         #region Logger
 
-        /// <summary>
-        /// Logger Log4Net
-        /// </summary>
-        private static readonly ILog Log = LogManager.GetLogger(typeof(StopAndUninstallHostBuilder));
+        private static readonly LogWriter Log;
 
         #endregion
 
@@ -182,7 +178,8 @@ namespace Topshelf.Squirrel.Updater.Builders
 					exitCode = _uninstallHost.Run();
 				}
 
-				return exitCode;
+
+                return exitCode;
 			}
 		}
 	}
