@@ -33,9 +33,24 @@ namespace Topshelf.Squirrel.Updater
         private readonly string serviceDisplayName;
 
         /// <summary>
+        /// Service RunAs 'Login'
+        /// </summary>
+        private string serviceRunAsLogin;
+
+        /// <summary>
+        /// Service RunAs 'Password'
+        /// </summary>
+        private string serviceRunAsPassword;
+
+        /// <summary>
         /// The with overlapping
         /// </summary>
         private readonly bool withOverlapping;
+
+        /// <summary>
+        /// Run Service AS
+        /// </summary>
+        private readonly RunAS TypeRunAs;
 
         /// <summary>
         /// The prompt for credentials while installing
@@ -55,25 +70,37 @@ namespace Topshelf.Squirrel.Updater
         /// <summary>
         /// Initializes a new instance of the <see cref="SquirreledHost"/> class.
         /// </summary>
-        /// <param name="selfUpdatableService">The self updatable service.</param>
-        /// <param name="serviceName">Name of the service.</param>
-        /// <param name="serviceDisplayName">Display name of the service.</param>
-        /// <param name="updater">The updater.</param>
-        /// <param name="withOverlapping">if set to <c>true</c> [with overlapping].</param>
-        /// <param name="promptForCredentialsWhileInstalling">if set to <c>true</c> [prompt for credentials while installing].</param>
         public SquirreledHost(
 			ISelfUpdatableService selfUpdatableService, 
 			string serviceName = null,
-			string serviceDisplayName = null, IUpdater updater = null, bool withOverlapping = false, bool promptForCredentialsWhileInstalling = false)
+			string serviceDisplayName = null, IUpdater updater = null, bool withOverlapping = false, RunAS pTypeRunAs = RunAS.LocalSystem)
 		{
 			var assemblyName = Assembly.GetEntryAssembly().GetName().Name;
             this.serviceName = serviceName ?? assemblyName;
 			this.serviceDisplayName = serviceDisplayName ?? assemblyName;
 			this.selfUpdatableService = selfUpdatableService;
 			this.withOverlapping = withOverlapping;
-			this.promptForCredentialsWhileInstalling = promptForCredentialsWhileInstalling;
+            TypeRunAs = pTypeRunAs;
+            promptForCredentialsWhileInstalling = false;
+            serviceRunAsLogin = "";
+            serviceRunAsPassword = "";
+            if (pTypeRunAs == RunAS.PromptForCredentials)
+            {
+                promptForCredentialsWhileInstalling = true;
+            }
 			this.updater = updater;
 		}
+
+        /// <summary>
+        /// Set credential of Service User
+        /// </summary>
+        /// <param name="pLogin"></param>
+        /// <param name="pPassword"></param>
+        public void SetCredentials(string pLogin, string pPassword)
+        {
+            serviceRunAsLogin = pLogin;
+            serviceRunAsPassword = pPassword;
+        }
 
         /// <summary>
         /// Configures the and run.
@@ -119,8 +146,23 @@ namespace Topshelf.Squirrel.Updater
 			}
 			else
 			{
-				config.RunAsLocalSystem();
-			}
+                if (TypeRunAs == RunAS.LocalSystem)
+                {
+                    config.RunAsLocalSystem();
+                }
+                else if (TypeRunAs == RunAS.LocalService)
+                {
+                    config.RunAsLocalService();
+                }
+                else if (TypeRunAs == RunAS.NetworkService)
+                {
+                    config.RunAsNetworkService();
+                }
+                else if (TypeRunAs == RunAS.SpecificUser)
+                {
+                    config.RunAs(serviceRunAsLogin, serviceRunAsPassword);
+                }
+            }
 
 			config.AddCommandLineSwitch("squirrel", _ => { });
 			config.AddCommandLineDefinition("firstrun", _ => Environment.Exit(0));

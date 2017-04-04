@@ -98,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\Host.StopAndUninstall.cs" />
+    <Compile Include="Enums\RunAS.cs" />
     <Compile Include="RunAsFirstUserHostConfigurator.cs" />
     <Compile Include="SquirreledHost.cs" />
     <Compile Include="Builders\Host.InstallAndStart.cs" />

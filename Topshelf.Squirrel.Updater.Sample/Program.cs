@@ -29,7 +29,7 @@ namespace Topshelf.Squirrel.Updater.Sample
         /// <summary>
         /// The URL nuget repositories
         /// </summary>
-        private static string _urlNugetRepositories = "http://nuget.itoo.me/feeds/PublicApplication";
+        private static string _urlNugetRepositories = "https://api.nuget.org/v3/index.json";
 
         #endregion
 
@@ -52,22 +52,17 @@ namespace Topshelf.Squirrel.Updater.Sample
                 // Start Service Updater
                 IUpdater selfupdater = null;
                 ServiceHosted service = new ServiceHosted();
-                try
-                {
-                    Log.Info("Updater Initialisation");
-                    IUpdateManager updateManager = new UpdateManager(_urlNugetRepositories);
-                    selfupdater = new RepeatedTimeUpdater(updateManager)
-                        .SetCheckUpdatePeriod(TimeSpan.FromMinutes(30));
-                    selfupdater.Start();
-                }
-                catch (Exception ex)
-                {
-                    Log.Error(ex);
-                    Log.Error("Sorry can't start updater ...");
-                }
-                
+                Log.Info("Updater Initialisation");
+                IUpdateManager updateManager = new UpdateManager(_urlNugetRepositories);
+                selfupdater = new RepeatedTimeUpdater(updateManager).SetCheckUpdatePeriod(TimeSpan.FromMinutes(30));
+                selfupdater.Start();
+
                 // Start TopShelf 
-                var x = new SquirreledHost(service, AssemblyHelper.AssemblyTitle, AssemblyHelper.AssemblyTitle, selfupdater, true, false);
+                var x = new SquirreledHost(service, AssemblyHelper.AssemblyTitle, AssemblyHelper.AssemblyTitle, selfupdater, true, RunAS.LocalSystem);
+
+                // If RunSpecificUser set login / password
+                //x.SetCredentials("", "");
+
                 x.ConfigureAndRun(HostConfig =>
                 {
                     HostConfig.Service<ServiceHosted>(s =>
@@ -80,6 +75,7 @@ namespace Topshelf.Squirrel.Updater.Sample
                     });
                     HostConfig.EnableServiceRecovery(rc => rc.RestartService(1));
                     HostConfig.EnableSessionChanged();
+                    HostConfig.UseLog4Net();
                     HostConfig.RunAsLocalSystem();
                     HostConfig.SetDescription(AssemblyHelper.AssemblyDescription);
                     HostConfig.SetDisplayName(AssemblyHelper.AssemblyTitle);

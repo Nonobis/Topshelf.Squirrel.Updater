@@ -59,22 +59,6 @@ namespace Topshelf.Squirrel.Updater
 			builder.Match<InstallBuilder>(x =>
            {
                bool valid = false;
-               var path = new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.Parent.FullName;
-               var filename = Path.Combine(path, credentials);
-               if (File.Exists(filename))
-               {
-                   try
-                   {
-                       var credlines = File.ReadAllLines(filename);
-                       Username = credlines[0];
-                       Password = credlines[1];
-                       valid = CheckCredentials(Username, Password);
-                   }
-                   catch (Exception ex)
-                   {
-                       Log.ErrorFormat("Reading error: {0}", ex);
-                   }
-               }
                while (!valid)
                {
                    using (ServiceInstallerDialog serviceInstallerDialog = new ServiceInstallerDialog())
@@ -88,10 +72,6 @@ namespace Topshelf.Squirrel.Updater
                                Username = serviceInstallerDialog.Username;
                                Password = serviceInstallerDialog.Password;
                                valid = CheckCredentials(Username, Password);
-                               if (valid)
-                               {
-                                   File.WriteAllLines(filename, new[] { Username, Password });
-                               }
                                break;
                            case ServiceInstallerDialogResult.Canceled:
                                throw new InvalidOperationException("UserCanceledInstall");
