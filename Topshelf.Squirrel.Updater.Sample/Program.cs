@@ -15,14 +15,16 @@ namespace Topshelf.Squirrel.Updater.Sample
 {
     class Program
     {
-        #region Logger
+
+        #region Definition du logger
 
         /// <summary>
-        /// The log
+        /// Logger Log4Net
         /// </summary>
         private static readonly ILog Log = LogManager.GetLogger(typeof(Program));
 
         #endregion
+
 
         #region Private Variables
 
