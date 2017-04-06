@@ -10,7 +10,7 @@
     <authors>A. Dartois</authors>
     <owners>A. Dartois</owners>
     <projectUrl>https://github.com/Nonobis/Topshelf.Squirrel.Updater</projectUrl>
-    <licenseUrl>https://github.com/Nonobis/Topshelf.Squirrel.Updater/License.txt</licenseUrl>
+    <licenseUrl>https://github.com/Nonobis/Topshelf.Squirrel.Updater/blob/master/Topshelf.Squirrel.Updater/License.txt</licenseUrl>
     <releaseNotes>Add license file and SimpleExtension.Topshelf</releaseNotes>
     <copyright>Copyright © A. Dartois 2017</copyright>
     <tags>Topshelf Squirrel Updater Service Auto Update Squirrel</tags>

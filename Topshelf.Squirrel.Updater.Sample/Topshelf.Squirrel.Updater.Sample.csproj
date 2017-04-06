@@ -72,12 +72,12 @@
       <HintPath>..\packages\Topshelf.Squirrel.Updater.0.0.3\lib\net45\NuGet.Squirrel.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleExtension, Version=0.0.0.20, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleExtension.0.0.0.20\lib\net461\SimpleExtension.dll</HintPath>
+    <Reference Include="SimpleExtension, Version=0.0.22.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleExtension.0.0.22\lib\net45\SimpleExtension.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleHelper, Version=0.0.0.9, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleHelper.0.0.0.9\lib\net452\SimpleHelper.dll</HintPath>
+    <Reference Include="SimpleHelper, Version=0.0.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleHelper.0.0.10\lib\net45\SimpleHelper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Splat, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
