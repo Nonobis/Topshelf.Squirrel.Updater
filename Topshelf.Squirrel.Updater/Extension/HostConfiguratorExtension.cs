@@ -3,8 +3,8 @@ using Topshelf.HostConfigurators;
 
 namespace Topshelf.Squirrel.Updater
 {
-	public static class RunAsExtensions
-	{
+	public static class HostConfiguratorExtension
+    {
         /// <summary>
         /// Runs as first prompt.
         /// </summary>
@@ -14,7 +14,7 @@ namespace Topshelf.Squirrel.Updater
         public static HostConfigurator RunAsFirstPrompt(this HostConfigurator configurator)
 		{
 			if (configurator == null)
-				throw new ArgumentNullException("configurator not specified");
+				throw new ArgumentNullException(nameof(configurator), "HostConfigurator not specified");
 
 			RunAsFirstUserHostConfigurator hostConfigurator = new RunAsFirstUserHostConfigurator();
 			configurator.AddConfigurator(hostConfigurator);

@@ -44,7 +44,7 @@ namespace Topshelf.Squirrel.Updater
         public HostBuilder Configure(HostBuilder builder)
 		{
 			if (builder == null)
-				throw new ArgumentNullException("builder");
+				throw new ArgumentNullException(nameof(builder));
 
 			builder.Match<InstallBuilder>(x =>
            {
@@ -64,7 +64,7 @@ namespace Topshelf.Squirrel.Updater
                                valid = CheckCredentials(Username, Password);
                                break;
                            case ServiceInstallerDialogResult.Canceled:
-                               throw new InvalidOperationException("UserCanceledInstall");
+                               throw new InvalidOperationException("User canceled installation.");
                        }
                    }
                }
@@ -108,7 +108,7 @@ namespace Topshelf.Squirrel.Updater
         /// <returns></returns>
         public IEnumerable<ValidateResult> Validate()
 		{
-			yield return this.Success("Credentials are valid !");
+			yield return this.Success("Specified credentials are valid !");
 		}
 	}
 }
