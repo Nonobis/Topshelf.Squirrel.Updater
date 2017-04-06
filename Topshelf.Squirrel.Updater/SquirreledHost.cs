@@ -18,22 +18,7 @@ namespace Topshelf.Squirrel.Updater
         private static readonly LogWriter Log;
 
         #endregion
-
-        /// <summary>
-        /// The service name
-        /// </summary>
-        private readonly string serviceName;
-
-        /// <summary>
-        /// Service Description
-        /// </summary>
-        private readonly string serviceDescription;
-
-        /// <summary>
-        /// The service display name
-        /// </summary>
-        private readonly string serviceDisplayName;
-
+        
         /// <summary>
         /// Service RunAs 'Login'
         /// </summary>
@@ -137,11 +122,7 @@ namespace Topshelf.Squirrel.Updater
 				service.AfterStartingService(() => { updater?.Start(); });
 				service.WhenStopped(s => { s.Stop(); });
 			});
-
-            config.SetDescription(serviceDescription);
-            config.SetServiceName(serviceName);
-			config.SetDisplayName(serviceDisplayName);
-			config.StartAutomatically();
+            config.StartAutomatically();
 			config.EnableShutdown();
             config.UseAssemblyInfoForServiceInfo(HostAssembly);
             if (promptForCredentialsWhileInstalling)
