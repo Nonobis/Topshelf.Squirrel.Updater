@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleExtension.Topshelf;
+using System;
 using System.Reflection;
 using Topshelf.HostConfigurators;
 using Topshelf.Logging;
@@ -111,56 +112,62 @@ namespace Topshelf.Squirrel.Updater
         /// <param name="config">The configuration.</param>
         private void Configure(HostConfigurator config)
 		{
-			config.Service<ISelfUpdatableService>(service =>
-			{
-				service.ConstructUsing(settings => selfUpdatableService);
-				service.WhenStarted((s, hostControl) =>
-				{
-					s.Start();
-					return true;
-				});
-				service.AfterStartingService(() => { updater?.Start(); });
-				service.WhenStopped(s => { s.Stop(); });
-			});
-            config.StartAutomatically();
-			config.EnableShutdown();
-            config.UseAssemblyInfoForServiceInfo(HostAssembly);
-            if (promptForCredentialsWhileInstalling)
-			{
-				config.RunAsFirstPrompt();
-			}
-			else
-			{
-                if (TypeRunAs == RunAS.LocalSystem)
+            try
+            {
+                config.Service<ISelfUpdatableService>(service =>
                 {
-                    config.RunAsLocalSystem();
+                    service.ConstructUsing(settings => selfUpdatableService);
+                    service.WhenStarted((s, hostControl) =>
+                    {
+                        s.Start();
+                        return true;
+                    });
+                    service.AfterStartingService(() => { updater?.Start(); });
+                    service.WhenStopped(s => { s.Stop(); });
+                });
+                config.StartAutomatically();
+                config.EnableShutdown();
+                config.UseAssemblyInfoForServiceInfo(HostAssembly);
+                if (promptForCredentialsWhileInstalling)
+                {
+                    config.RunAsFirstPrompt();
                 }
-                else if (TypeRunAs == RunAS.LocalService)
+                else
                 {
-                    config.RunAsLocalService();
-                }
-                else if (TypeRunAs == RunAS.NetworkService)
-                {
-                    config.RunAsNetworkService();
-                }
-                else if (TypeRunAs == RunAS.SpecificUser)
-                {
-                    if (string.IsNullOrEmpty(serviceLogin))
-                        throw new Exception("Service Login not specified");
+                    if (TypeRunAs == RunAS.LocalSystem)
+                    {
+                        config.RunAsLocalSystem();
+                    }
+                    else if (TypeRunAs == RunAS.LocalService)
+                    {
+                        config.RunAsLocalService();
+                    }
+                    else if (TypeRunAs == RunAS.NetworkService)
+                    {
+                        config.RunAsNetworkService();
+                    }
+                    else if (TypeRunAs == RunAS.SpecificUser)
+                    {
+                        if (string.IsNullOrEmpty(serviceLogin))
+                            throw new Exception("Service Login not specified");
 
-                    if (string.IsNullOrEmpty(servicePassword))
-                        throw new Exception("Service Password not specified");
+                        if (string.IsNullOrEmpty(servicePassword))
+                            throw new Exception("Service Password not specified");
 
-                    config.RunAs(serviceLogin, servicePassword);
+                        config.RunAs(serviceLogin, servicePassword);
+                    }
                 }
+
+                config.AddCommandLineSwitch("squirrel", _ => { });
+                config.AddCommandLineDefinition("firstrun", _ => Environment.Exit(0));
+                config.AddCommandLineDefinition("obsolete", _ => Environment.Exit(0));
+                config.AddCommandLineDefinition("updated", version => { config.UseHostBuilder((env, settings) => new UpdateHostBuilder(env, settings, version, withOverlapping)); });
+                config.AddCommandLineDefinition("install", version => { config.UseHostBuilder((env, settings) => new InstallAndStartHostBuilder(env, settings, version)); });
+                config.AddCommandLineDefinition("uninstall", _ => { config.UseHostBuilder((env, settings) => new StopAndUninstallHostBuilder(env, settings)); });
+            } catch (Exception ex)
+            {
+                Log.Error("Exception : ", ex);
             }
-
-			config.AddCommandLineSwitch("squirrel", _ => { });
-			config.AddCommandLineDefinition("firstrun", _ => Environment.Exit(0));
-			config.AddCommandLineDefinition("obsolete", _ => Environment.Exit(0));
-			config.AddCommandLineDefinition("updated", version => { config.UseHostBuilder((env, settings) => new UpdateHostBuilder(env, settings, version, withOverlapping)); });
-			config.AddCommandLineDefinition("install", version => { config.UseHostBuilder((env, settings) => new InstallAndStartHostBuilder(env, settings, version)); });
-			config.AddCommandLineDefinition("uninstall", _ => { config.UseHostBuilder((env, settings) => new StopAndUninstallHostBuilder(env, settings)); });
 		}
 	}
 }

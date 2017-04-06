@@ -69,6 +69,10 @@
       <HintPath>packages\squirrel.windows.1.5.2\lib\Net45\NuGet.Squirrel.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SimpleExtension.Topshelf, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleExtension.Topshelf.0.0.1\lib\net45\SimpleExtension.Topshelf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Splat, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Splat.2.0.0\lib\Net45\Splat.dll</HintPath>
       <Private>True</Private>
@@ -91,14 +95,12 @@
   <ItemGroup>
     <Compile Include="Builders\Host.StopAndUninstall.cs" />
     <Compile Include="Enums\RunAS.cs" />
-    <Compile Include="RunAsFirstUserHostConfigurator.cs" />
     <Compile Include="SquirreledHost.cs" />
     <Compile Include="Builders\Host.InstallAndStart.cs" />
     <Compile Include="Builders\Host.Update.cs" />
     <Compile Include="Interfaces\ISelfUpdatableService.cs" />
     <Compile Include="Interfaces\IUpdater.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Extension\HostConfiguratorExtension.cs" />
     <Compile Include="RepeatedTimeUpdater.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +115,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="License.txt" />
     <Content Include="ReleaseNotes.txt" />
   </ItemGroup>
   <ItemGroup>

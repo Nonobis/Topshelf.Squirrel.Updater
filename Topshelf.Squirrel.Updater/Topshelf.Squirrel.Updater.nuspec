@@ -10,18 +10,21 @@
     <authors>A. Dartois</authors>
     <owners>A. Dartois</owners>
     <projectUrl>https://github.com/Nonobis/Topshelf.Squirrel.Updater</projectUrl>
-    <releaseNotes>Add symbols in package</releaseNotes>
+    <licenseUrl>https://github.com/Nonobis/Topshelf.Squirrel.Updater/License.txt</licenseUrl>
+    <releaseNotes>Add license file and SimpleExtension.Topshelf</releaseNotes>
     <copyright>Copyright © A. Dartois 2017</copyright>
     <tags>Topshelf Squirrel Updater Service Auto Update Squirrel</tags>
     <!--
-    <licenseUrl>http://#</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <releaseNotes>
-    </releaseNotes>
     -->
+    <dependencies>
+      <dependency id="Topshelf" version="4.0.3" />
+      <dependency id="SimpleExtension.Topshelf" version="0.0.1" />
+      <dependency id="squirrel.windows" version="1.5.2" />
+    </dependencies>
   </metadata>
   <files>
-    <file src="*.*" target="lib\net45\" exclude="*.pdb;*.nupkg;*.vshost.*"/>
-    <file src="**\*.*" target="lib\net45\" exclude="*.pdb;*.nupkg;*.vshost.*"/>
+    <file src="Topshelf.Squirrel.Updater.*" target="lib\net45\" exclude="*.pdb;*.nupkg;*.vshost.*"/>
+    <file src="**\Topshelf.Squirrel.Updater.*" target="lib\net45\" exclude="*.pdb;*.nupkg;*.vshost.*"/>
   </files>
 </package>
