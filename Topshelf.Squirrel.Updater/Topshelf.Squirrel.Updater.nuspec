@@ -5,8 +5,8 @@
     <title>Topshelf.Squirrel.Updater</title>
     <!-- version will be replaced by MSBuild -->
     <version>0.0.0.0</version>
-    <description>Integration of auto-update mechanism in Topshelf services out of the box. (Fork of https://github.com/Kibnet/Topshelf.Squirrel.Updater).</description>
-    <summary>Integration of auto-update mechanism in Topshelf services out of the box. (Fork of https://github.com/Kibnet/Topshelf.Squirrel.Updater).</summary>
+    <description>Integration of auto-update mechanism in Topshelf services out of the box. (Fork of https://github.com/Kibnet/Topshelf.Squirrel.Windows).</description>
+    <summary>Integration of auto-update mechanism in Topshelf services out of the box. (Fork of https://github.com/Kibnet/Topshelf.Squirrel.Windows).</summary>
     <authors>A. Dartois</authors>
     <owners>A. Dartois</owners>
     <projectUrl>https://github.com/Nonobis/Topshelf.Squirrel.Updater</projectUrl>
