@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Topshelf;
+using Topshelf.Logging;
 using Topshelf.Squirrel.Updater;
 using Topshelf.Squirrel.Updater.Interfaces;
 
@@ -17,11 +18,8 @@ namespace Topshelf.Squirrel.Updater.Sample
     {
 
         #region Definition du logger
-
-        /// <summary>
-        /// Logger Log4Net
-        /// </summary>
-        private static readonly ILog Log = LogManager.GetLogger(typeof(Program));
+        
+        private static readonly LogWriter Log = HostLogger.Get(typeof(Program));
 
         #endregion
 

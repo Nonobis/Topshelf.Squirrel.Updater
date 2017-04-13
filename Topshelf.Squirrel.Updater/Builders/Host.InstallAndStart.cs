@@ -11,8 +11,8 @@ namespace Topshelf.Squirrel.Updater.Builders
 	{
 
         #region Logger
-
-        private static readonly LogWriter Log;
+        
+        private static readonly LogWriter Log = HostLogger.Get(typeof(InstallAndStartHostBuilder));
 
         #endregion
 

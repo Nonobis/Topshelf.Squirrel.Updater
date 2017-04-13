@@ -13,7 +13,7 @@ namespace Topshelf.Squirrel.Updater
 
         #region Logger
 
-        private static readonly LogWriter Log;
+        private static readonly LogWriter Log = HostLogger.Get(typeof(RepeatedTimeUpdater));
 
         #endregion
 

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Topshelf.Logging;
 using Topshelf.Squirrel.Updater.Interfaces;
 
 namespace Topshelf.Squirrel.Updater.Sample
@@ -8,9 +9,9 @@ namespace Topshelf.Squirrel.Updater.Sample
         #region Definition du logger
 
         /// <summary>
-        /// Logger Log4Net
+        /// Logger
         /// </summary>
-        //private static readonly ILog Log = LogManager.GetLogger(typeof(ServiceHosted));
+        private static readonly LogWriter Log = HostLogger.Get(typeof(ServiceHosted));
 
         #endregion
 
