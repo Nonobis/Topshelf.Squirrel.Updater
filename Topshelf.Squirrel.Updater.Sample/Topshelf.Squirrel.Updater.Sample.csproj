@@ -32,20 +32,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DeltaCompressionDotNet, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1d14d6e5194e7f4a, processorArchitecture=MSIL">
-      <HintPath>..\packages\DeltaCompressionDotNet.1.0.0\lib\net45\DeltaCompressionDotNet.dll</HintPath>
+    <Reference Include="DeltaCompressionDotNet, Version=1.1.0.0, Culture=neutral, PublicKeyToken=1d14d6e5194e7f4a, processorArchitecture=MSIL">
+      <HintPath>..\packages\DeltaCompressionDotNet.1.1.0\lib\net20\DeltaCompressionDotNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DeltaCompressionDotNet.MsDelta, Version=1.0.0.0, Culture=neutral, PublicKeyToken=46b2138a390abf55, processorArchitecture=MSIL">
-      <HintPath>..\packages\DeltaCompressionDotNet.1.0.0\lib\net45\DeltaCompressionDotNet.MsDelta.dll</HintPath>
+    <Reference Include="DeltaCompressionDotNet.MsDelta, Version=1.1.0.0, Culture=neutral, PublicKeyToken=46b2138a390abf55, processorArchitecture=MSIL">
+      <HintPath>..\packages\DeltaCompressionDotNet.1.1.0\lib\net20\DeltaCompressionDotNet.MsDelta.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DeltaCompressionDotNet.PatchApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3e8888ee913ed789, processorArchitecture=MSIL">
-      <HintPath>..\packages\DeltaCompressionDotNet.1.0.0\lib\net45\DeltaCompressionDotNet.PatchApi.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\squirrel.windows.1.5.2\lib\Net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    <Reference Include="DeltaCompressionDotNet.PatchApi, Version=1.1.0.0, Culture=neutral, PublicKeyToken=3e8888ee913ed789, processorArchitecture=MSIL">
+      <HintPath>..\packages\DeltaCompressionDotNet.1.1.0\lib\net20\DeltaCompressionDotNet.PatchApi.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -53,43 +49,47 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\Mono.Cecil.0.9.6.1\lib\net45\Mono.Cecil.dll</HintPath>
+      <HintPath>..\packages\Mono.Cecil.0.9.6.4\lib\net45\Mono.Cecil.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Mono.Cecil.Mdb, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\Mono.Cecil.0.9.6.1\lib\net45\Mono.Cecil.Mdb.dll</HintPath>
+      <HintPath>..\packages\Mono.Cecil.0.9.6.4\lib\net45\Mono.Cecil.Mdb.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Mono.Cecil.Pdb, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\Mono.Cecil.0.9.6.1\lib\net45\Mono.Cecil.Pdb.dll</HintPath>
+      <HintPath>..\packages\Mono.Cecil.0.9.6.4\lib\net45\Mono.Cecil.Pdb.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Mono.Cecil.Rocks, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <HintPath>..\packages\Mono.Cecil.0.9.6.1\lib\net45\Mono.Cecil.Rocks.dll</HintPath>
+      <HintPath>..\packages\Mono.Cecil.0.9.6.4\lib\net45\Mono.Cecil.Rocks.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NuGet.Squirrel, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\squirrel.windows.1.5.2\lib\Net45\NuGet.Squirrel.dll</HintPath>
+      <HintPath>..\packages\squirrel.windows.1.7.8\lib\Net45\NuGet.Squirrel.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleExtension, Version=0.0.22.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleExtension.0.0.22\lib\net45\SimpleExtension.dll</HintPath>
+    <Reference Include="SharpCompress, Version=0.18.1.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpCompress.0.18.1\lib\net45\SharpCompress.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleExtension, Version=0.0.23.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleExtension.0.0.23\lib\net45\SimpleExtension.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SimpleExtension.Topshelf, Version=0.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SimpleExtension.Topshelf.0.0.1\lib\net45\SimpleExtension.Topshelf.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleHelper, Version=0.0.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleHelper.0.0.10\lib\net45\SimpleHelper.dll</HintPath>
+    <Reference Include="SimpleHelper, Version=0.0.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleHelper.0.0.11\lib\net45\SimpleHelper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Splat.1.6.2\lib\Net45\Splat.dll</HintPath>
+    <Reference Include="Splat, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Splat.2.0.0\lib\Net45\Splat.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Squirrel, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\squirrel.windows.1.5.2\lib\Net45\Squirrel.dll</HintPath>
+    <Reference Include="Squirrel, Version=1.7.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\squirrel.windows.1.7.8\lib\Net45\Squirrel.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -108,8 +108,8 @@
       <HintPath>..\packages\Topshelf.Log4Net.4.0.3\lib\net452\Topshelf.Log4Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Topshelf.Squirrel.Updater, Version=0.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Topshelf.Squirrel.Updater.0.0.4\lib\net45\Topshelf.Squirrel.Updater.dll</HintPath>
+    <Reference Include="Topshelf.Squirrel.Updater, Version=0.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Topshelf.Squirrel.Updater.0.0.5\lib\net45\Topshelf.Squirrel.Updater.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -120,7 +120,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Topshelf.Squirrel.Updater.Sample.nuspec">
       <SubType>Designer</SubType>
     </None>
@@ -140,7 +142,7 @@
     <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
       <Output TaskParameter="Assemblies" ItemName="myAssemblyInfo" />
     </GetAssemblyIdentity>
-    <Exec Command="..\packages\NuGet.CommandLine.3.5.0\tools\nuget.exe pack $(AssemblyName).nuspec -Version $([System.Version]::Parse(%(myAssemblyInfo.Version)).ToString(3)) -Properties Configuration=Release -OutputDirectory $(OutDir) -BasePath $(OutDir)" />
-    <Exec Command="..\packages\squirrel.windows.1.5.2\tools\Squirrel.exe --releasify $(TargetDir)$(AssemblyName).$([System.Version]::Parse(%(myAssemblyInfo.Version)).ToString(3)).nupkg" />
+    <Exec Command="..\packages\NuGet.CommandLine.4.3.0\tools\nuget.exe pack $(AssemblyName).nuspec -Version $([System.Version]::Parse(%(myAssemblyInfo.Version)).ToString(3)) -Properties Configuration=Release -OutputDirectory $(OutDir) -BasePath $(OutDir)" />
+    <Exec Command="..\packages\squirrel.windows.1.7.8\tools\Squirrel.exe --releasify $(TargetDir)$(AssemblyName).$([System.Version]::Parse(%(myAssemblyInfo.Version)).ToString(3)).nupkg" />
   </Target>
 </Project>

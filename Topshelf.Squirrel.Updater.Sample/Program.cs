@@ -29,7 +29,7 @@ namespace Topshelf.Squirrel.Updater.Sample
         /// <summary>
         /// The URL nuget repositories
         /// </summary>
-        private static string _urlNugetRepositories = "https://api.nuget.org/v3/index.json";
+        private static string _urlNugetRepositories = "https://api.nuget.org/v3/";
 
         #endregion
 
