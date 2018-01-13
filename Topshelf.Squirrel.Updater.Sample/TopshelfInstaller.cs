@@ -1,6 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System.Collections;
+using System.ComponentModel;
 using System.Configuration.Install;
-using System.ServiceProcess;
+using System.Diagnostics;
 using SimpleHelper;
 
 namespace Topshelf.Squirrel.Updater.Sample
@@ -16,37 +17,41 @@ namespace Topshelf.Squirrel.Updater.Sample
         /// </summary>
         public TopshelfInstaller()
         {
-            using (var serviceInstaller = new ServiceInstaller())
-            {
-                using (var serviceProcessInstaller = new ServiceProcessInstaller {Account = ServiceAccount.LocalService})
-                {
-                    serviceProcessInstaller.Account = ServiceAccount.LocalSystem;
-                    serviceProcessInstaller.Username = null;
-                    serviceProcessInstaller.Password = null;
-
-                    serviceInstaller.DisplayName = AssemblyHelper.AssemblyTitle;
-                    serviceInstaller.ServiceName = AssemblyHelper.AssemblyTitle;
-                    serviceInstaller.Description = AssemblyHelper.AssemblyDescription;
-                    serviceInstaller.DelayedAutoStart = false;
-                    serviceInstaller.StartType = ServiceStartMode.Automatic;
-                    Installers.AddRange(new Installer[] { serviceProcessInstaller, serviceInstaller });
-                }
-            }
-            Committed += ServiceInstaller_Committed;
         }
 
-        /// <summary>
-        /// Handles the Committed event of the ServiceInstaller control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="InstallEventArgs"/> instance containing the event data.</param>
-        void ServiceInstaller_Committed(object sender, InstallEventArgs e)
+        public override void Install(IDictionary stateSaver)
         {
-            // Auto Start the Service Once Installation is Finished.
-            using (var controller = new ServiceController(AssemblyHelper.AssemblyTitle))
+            var topshelfAssembly = Context.Parameters[AssemblyHelper.ExecutablePath];
+            stateSaver.Add(AssemblyHelper.AssemblyTitle, topshelfAssembly);
+            RunHidden(topshelfAssembly, "/install");
+            base.Install(stateSaver);
+        }
+
+        public override void Uninstall(IDictionary savedState)
+        {
+            if (savedState != null)
             {
-                controller.Start();
+                var topshelfAssembly = savedState[AssemblyHelper.AssemblyTitle].ToString();
+                RunHidden(topshelfAssembly, "/uninstall");
+            }
+            base.Uninstall(savedState);
+        }
+
+        private static void RunHidden(string primaryOutputAssembly, string arguments)
+        {
+            var startInfo = new ProcessStartInfo(primaryOutputAssembly)
+            {
+                WindowStyle = ProcessWindowStyle.Normal,
+                Arguments = arguments,
+                Verb = "runas",
+                UseShellExecute = true
+            };
+
+            using (var process = Process.Start(startInfo))
+            {
+                process?.WaitForExit();
             }
         }
+
     }
 }
