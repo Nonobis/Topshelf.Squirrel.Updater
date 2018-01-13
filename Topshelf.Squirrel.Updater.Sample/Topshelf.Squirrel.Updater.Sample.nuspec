@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>Topshelf.Squirrel.Updater.Sample</id>
+    <id>TopshelfSquirrelUpdaterSample</id>
     <title>Topshelf.Squirrel.Updater.Sample</title>
     <!-- version will be replaced by MSBuild -->
     <version>0.0.0.0</version>

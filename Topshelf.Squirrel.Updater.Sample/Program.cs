@@ -53,11 +53,10 @@ namespace Topshelf.Squirrel.Updater.Sample
                 IUpdater selfupdater = null;
                 ServiceHosted service = new ServiceHosted();
 
-                IUpdateManager updateManager = null;
                 try 
                 {
                     Log.Info("Updater Initialisation");
-                    updateManager = new UpdateManager(_urlNugetRepositories, AssemblyHelper.AssemblyTitle);
+                    IUpdateManager updateManager = new UpdateManager(_urlNugetRepositories, AssemblyHelper.AssemblyTitle);
                     selfupdater = new RepeatedTimeUpdater(updateManager).SetCheckUpdatePeriod(TimeSpan.FromMinutes(30));
                     selfupdater.Start();
                 } 
