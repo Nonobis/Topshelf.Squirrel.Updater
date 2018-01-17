@@ -18,11 +18,10 @@ namespace Topshelf.Squirrel.Updater.Sample
     {
 
         #region Definition du logger
-        
+
         private static readonly LogWriter Log = HostLogger.Get(typeof(Program));
 
         #endregion
-
 
         #region Private Variables
 
@@ -53,14 +52,13 @@ namespace Topshelf.Squirrel.Updater.Sample
                 IUpdater selfupdater = null;
                 ServiceHosted service = new ServiceHosted();
 
-                try 
+                try
                 {
                     Log.Info("Updater Initialisation");
-                    IUpdateManager updateManager = new UpdateManager(_urlNugetRepositories, AssemblyHelper.AssemblyTitle);
-                    selfupdater = new RepeatedTimeUpdater(updateManager).SetCheckUpdatePeriod(TimeSpan.FromMinutes(30));
+                    selfupdater = new RepeatedTimeUpdater(_urlNugetRepositories, AssemblyHelper.AssemblyTitle).SetCheckUpdatePeriod(TimeSpan.FromSeconds(5));
                     selfupdater.Start();
-                } 
-                catch(Exception exx)
+                }
+                catch (Exception exx)
                 {
                     Log.WarnFormat("'{0}' is not installed via Squirrel. Install program first.", AssemblyHelper.AssemblyTitle);
                     Log.Warn(exx);
