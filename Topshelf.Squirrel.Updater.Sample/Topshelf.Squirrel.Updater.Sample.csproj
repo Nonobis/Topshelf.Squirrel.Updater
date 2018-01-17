@@ -97,6 +97,10 @@
       <HintPath>..\packages\Topshelf.Log4Net.4.0.3\lib\net452\Topshelf.Log4Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Topshelf.Squirrel.Updater, Version=0.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Topshelf.Squirrel.Updater.0.0.7\lib\net45\Topshelf.Squirrel.Updater.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -120,12 +124,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="lib\net45\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Topshelf.Squirrel.Updater\Topshelf.Squirrel.Updater.csproj">
-      <Project>{aef86ad8-cece-426d-9dc7-6313b6046cda}</Project>
-      <Name>Topshelf.Squirrel.Updater</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
