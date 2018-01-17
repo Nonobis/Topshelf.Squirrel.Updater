@@ -9,6 +9,8 @@ Used projects:
 * [Topshelf](https://github.com/Topshelf/Topshelf)
 * [Squirrel.Windows](https://github.com/Squirrel/Squirrel.Windows)
 
+Original Project : forked from Kibnet/Topshelf.Squirrel.Windows
+
 ## NuGet Packages
 
 ```
