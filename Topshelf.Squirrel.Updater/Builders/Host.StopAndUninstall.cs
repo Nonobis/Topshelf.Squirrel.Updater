@@ -167,7 +167,7 @@ namespace Topshelf.Squirrel.Updater.Builders
 					return TopshelfExitCode.Ok;
 				}
 
-				if (exitCode == TopshelfExitCode.StopServiceFailed)
+				if (exitCode == TopshelfExitCode.ServiceControlRequestFailed)
 				{
 					Process.GetProcessById(_processId).Kill();
 					exitCode = TopshelfExitCode.Ok;
