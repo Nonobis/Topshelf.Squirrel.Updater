@@ -18,9 +18,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     -->
     <dependencies>
-      <dependency id="Topshelf" version="4.0.3" />
+      <dependency id="Topshelf" version="4.2.0" />
       <dependency id="SimpleExtension.Topshelf" version="0.0.1" />
-      <dependency id="squirrel.windows" version="1.5.2" />
+      <dependency id="squirrel.windows" version="1.9.0" />
     </dependencies>
   </metadata>
   <files>
