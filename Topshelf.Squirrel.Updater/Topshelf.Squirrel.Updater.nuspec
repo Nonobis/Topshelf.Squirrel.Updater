@@ -12,7 +12,7 @@
     <projectUrl>https://github.com/Nonobis/Topshelf.Squirrel.Updater</projectUrl>
     <licenseUrl>https://github.com/Nonobis/Topshelf.Squirrel.Updater/blob/master/Topshelf.Squirrel.Updater/License.txt</licenseUrl>
     <releaseNotes>Fix Logger</releaseNotes>
-    <copyright>Copyright © A. Dartois 2017</copyright>
+    <copyright>Copyright © A. Dartois 2017-2019</copyright>
     <tags>Topshelf Squirrel Updater Service Auto Update Squirrel</tags>
     <!--
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
