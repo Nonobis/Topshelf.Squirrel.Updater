@@ -133,6 +133,6 @@
     <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
       <Output TaskParameter="Assemblies" ItemName="myAssemblyInfo" />
     </GetAssemblyIdentity>
-    <Exec Command="..\packages\NuGet.CommandLine.4.3.0\tools\nuget.exe pack $(AssemblyName).nuspec -Symbols -Version $([System.Version]::Parse(%(myAssemblyInfo.Version)).ToString(3)) -Properties Configuration=Release -OutputDirectory $(OutDir) -BasePath $(OutDir)" />
+    <Exec Command="..\packages\NuGet.CommandLine.4.9.2\tools\nuget.exe pack $(AssemblyName).nuspec -Symbols -Version $([System.Version]::Parse(%(myAssemblyInfo.Version)).ToString(3)) -Properties Configuration=Release -OutputDirectory $(OutDir) -BasePath $(OutDir)" />
   </Target>
 </Project>
